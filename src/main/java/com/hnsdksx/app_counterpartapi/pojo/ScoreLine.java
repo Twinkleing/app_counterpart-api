@@ -13,13 +13,20 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @ToString
 @Accessors(chain = true)
-@TableName("school")
+@TableName("score_line")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class School {
+public class ScoreLine {
     @TableId(type = IdType.AUTO)
     private Long id;
+    private Integer year;
+    private String type;
     private String code;
     private String name;
     private String nature;
+    private Integer plans_number;
+    private Integer shift_line;
+    private Integer sub_one;
+    private Integer sub_two;
+    private Integer sub_three;
     private String link;
 }

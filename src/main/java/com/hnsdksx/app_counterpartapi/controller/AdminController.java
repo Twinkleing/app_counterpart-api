@@ -1,8 +1,6 @@
 package com.hnsdksx.app_counterpartapi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.config.GlobalConfig;
-import com.hnsdksx.app_counterpartapi.pojo.School;
 import com.hnsdksx.app_counterpartapi.response.GlobalConstant;
 import com.hnsdksx.app_counterpartapi.response.Response;
 import com.hnsdksx.app_counterpartapi.services.AdminService;
@@ -17,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("admin")
