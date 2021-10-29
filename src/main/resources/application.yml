@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_counterpart?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     username: root
-    password: sskjkbt123456
+    password: 123456
   servlet:
     multipart:
       max-file-size: 100MB
@@ -26,4 +26,4 @@ jwt:
   tokenHead: Bearer  #JWT负载中拿到开头
 
 server:
-  port: 8088
+  port: 8080

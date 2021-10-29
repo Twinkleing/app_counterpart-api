@@ -16,3 +16,13 @@ create table score_line
     sub_three    int,
     link         varchar(50)
 );
+
+create table user_info
+(
+    id              bigint primary key auto_increment,
+    user_name       varchar(20) not null,
+    password        varchar(65) not null,
+    email           varchar(65) not null,
+    last_login_time timestamp default current_timestamp,
+    last_login_ip   varchar(20) not null
+)
