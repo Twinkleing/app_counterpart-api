@@ -25,8 +25,13 @@ public class ClientController {
     @ResponseBody
     @GetMapping("schoolByScore")
     public CommonResult<JSONObject> schoolByScore(@RequestParam(value = "name", required = false) String name,
-                                                  @RequestParam(value = "year", required = false) String year) {
-        List<ScoreLine> scoreLines = clientService.schoolByScore(name, year);
+                                                  @RequestParam(value = "type", required = false) String type,
+                                                  @RequestParam(value = "year", required = false) String year,
+                                                  @RequestParam(value = "nature", required = false) String nature,
+                                                  @RequestParam(value = "plans_number", required = false) String plans_number,
+                                                  @RequestParam(value = "shift_line", required = false) String shift_line) {
+        List<ScoreLine> scoreLines = clientService.schoolByScore(name, type, year, nature,
+                plans_number, shift_line);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("total", scoreLines.size());
         jsonObject.put("scoreLines", scoreLines);

@@ -36,7 +36,6 @@ public class AdminController {
     @ApiOperation("数据上传")
     @PostMapping("submitFile")
     public CommonResult<JSONObject> submitFile(@RequestParam("file") MultipartFile file) throws IOException {
-        ResultCode.FILE_FORMAT_ERROR.isTrue();
         InputStream s = file.getInputStream();
         Workbook workbook = new XSSFWorkbook(s);
         Sheet sheet = workbook.getSheetAt(0);
