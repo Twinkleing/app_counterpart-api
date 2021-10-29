@@ -85,6 +85,7 @@ public class AdminSerImp implements AdminService {
             Date date = new Date();
             UpdateWrapper<UserInfo> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq("user_name", userInfo.getUser_name())
+                    .set("last_login_ip",userInfo.getLast_login_ip())
                     .set("last_login_time", simpleDateFormat.format(date));
             userMapper.update(null, updateWrapper);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

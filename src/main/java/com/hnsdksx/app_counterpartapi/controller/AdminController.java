@@ -53,7 +53,9 @@ public class AdminController {
     @ResponseBody
     @ApiOperation("登录")
     @PostMapping("login")
-    public CommonResult<Object> login(@RequestBody @Validated UserInfo userInfo) {
+    public CommonResult<Object> login(@RequestBody @Validated UserInfo userInfo,
+                                      HttpServletRequest request) {
+        userInfo.setLast_login_ip(request.getRemoteHost());
         String token = adminService.login(userInfo);
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
