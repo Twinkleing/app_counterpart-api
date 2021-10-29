@@ -1,47 +1,56 @@
 package com.hnsdksx.app_counterpartapi.exception;
 
-
-import com.hnsdksx.app_counterpartapi.constant.AssertException;
-import com.hnsdksx.app_counterpartapi.response.GlobalConstant;
-import com.hnsdksx.app_counterpartapi.response.Response;
-import org.springframework.beans.factory.annotation.Value;
+import com.hnsdksx.app_counterpartapi.result.CommonResult;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 /**
- * 全局异常处理器
- *
- * @author kuangbaoting
+ * 全局异常处理
+ * Created by macro on 2020/2/27.
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    /**
-     * 是否打印断言异常
-     */
-    @Value("${app-counterpart.global-exception.assert-exception}")
-    private Boolean assertException = false;
 
-    /**
-     * 处理断言异常
-     */
-    @ExceptionHandler(AssertException.class)
     @ResponseBody
-    public Response<Object> handlerAssertException(AssertException e) {
-        if (assertException) {
-            System.out.println("AssertException : "+e.getMessage());
+    @ExceptionHandler(value = ApiException.class)
+    public CommonResult handle(ApiException e) {
+        if (e.getErrorCode() != null) {
+            return CommonResult.failed(e.getErrorCode());
         }
-        return Response.error(e.getCode(),e.getMessage());
+        return CommonResult.failed(e.getMessage());
     }
 
-    /**
-     * 其他异常
-     */
-    @ExceptionHandler(Exception.class)
     @ResponseBody
-    public Response<Object> handlerException(Exception e) {
-        e.printStackTrace();
-        return Response.error(GlobalConstant.ERROR.getCode(), GlobalConstant.ERROR.getMessage());
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public CommonResult handleValidException(MethodArgumentNotValidException e) {
+        BindingResult bindingResult = e.getBindingResult();
+        String message = null;
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null) {
+                message = fieldError.getField()+fieldError.getDefaultMessage();
+            }
+        }
+        return CommonResult.validateFailed(message);
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = BindException.class)
+    public CommonResult handleValidException(BindException e) {
+        BindingResult bindingResult = e.getBindingResult();
+        String message = null;
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null) {
+                message = fieldError.getField()+fieldError.getDefaultMessage();
+            }
+        }
+        return CommonResult.validateFailed(message);
+    }
+
 }

@@ -29,4 +29,17 @@ public class ScoreLine {
     private Integer sub_two;
     private Integer sub_three;
     private String link;
+
+    public ScoreLine(Integer year, String type, String code, String name, String nature, Integer plans_number, Integer shift_line, Integer sub_one, Integer sub_two, Integer sub_three) {
+        this.year = year;
+        this.type = type;
+        this.code = code;
+        this.name = name;
+        this.nature = nature;
+        this.plans_number = plans_number;
+        this.shift_line = shift_line;
+        this.sub_one = sub_one;
+        this.sub_two = sub_two;
+        this.sub_three = sub_three;
+    }
 }

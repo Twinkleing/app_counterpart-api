@@ -1,20 +1,19 @@
-package com.hnsdksx.app_counterpartapi.constant;
+package com.hnsdksx.app_counterpartapi.result;
 
+import com.hnsdksx.app_counterpartapi.exception.ApiException;
 
 /**
- * 自定义断言接口
- *
- * @author kuangbaoting
+ * 封装API的错误码
+ * Created by macro on 2019/4/19.
  */
-public interface Assert {
-
-
-    default void newException() {
-        throw new AssertException(getMessage(),getCode());
-    }
+public interface IErrorCode {
+    long getCode();
 
     String getMessage();
-    Integer getCode();
+
+    default void newException() {
+        throw new ApiException(this);
+    }
 
     default void isFalse(boolean b) {
         if (!b) {
